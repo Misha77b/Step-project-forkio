@@ -1,18 +1,25 @@
 import gulp from "gulp";
+// path import
 import { path } from "./gulp/config/path.js";
+// tasks import
 import { copy } from "./gulp/tasks/copy.js";
+import { html } from "./gulp/tasks/html.js";
 import { reset } from "./gulp/tasks/reset.js";
+// plugins
+import { plugins } from "./gulp/config/plugins.js";
 
 global.app = {
   path: path,
   gulp: gulp,
+  plugins: plugins,
 };
 
 function watcher() {
   gulp.watch(path.watch.files, copy);
+  gulp.watch(path.watch.html, html);
 }
-
-const dev = gulp.series(reset, copy, watcher);
+const mainTask = gulp.parallel(copy, html);
+const dev = gulp.series(reset, mainTask, watcher);
 
 gulp.task("default", dev);
 
