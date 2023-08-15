@@ -5,6 +5,7 @@ import { path } from "./gulp/config/path.js";
 import { copy } from "./gulp/tasks/copy.js";
 import { html } from "./gulp/tasks/html.js";
 import { reset } from "./gulp/tasks/reset.js";
+import { server } from "./gulp/tasks/server.js";
 // plugins
 import { plugins } from "./gulp/config/plugins.js";
 
@@ -18,9 +19,11 @@ function watcher() {
   gulp.watch(path.watch.files, copy);
   gulp.watch(path.watch.html, html);
 }
+//  main tasks
 const mainTask = gulp.parallel(copy, html);
-const dev = gulp.series(reset, mainTask, watcher);
-
+// gulp task execution scenario
+const dev = gulp.series(reset, mainTask, gulp.parallel(watcher, server));
+// default task execution
 gulp.task("default", dev);
 
 // const gulp = require("gulp");
