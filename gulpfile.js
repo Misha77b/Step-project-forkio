@@ -17,12 +17,12 @@ global.app = {
 };
 
 function watcher() {
-  gulp.watch(path.watch.files, copy);
+  //   gulp.watch(path.watch.files, copy);
   gulp.watch(path.watch.html, html);
   gulp.watch(path.watch.scss, scss);
 }
 //  main tasks
-const mainTask = gulp.parallel(copy, html, scss);
+const mainTask = gulp.parallel(html, scss);
 // gulp task execution scenario
 const dev = gulp.series(reset, mainTask, gulp.parallel(watcher, server));
 // default task execution

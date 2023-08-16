@@ -1,6 +1,9 @@
 import dartSass from "sass";
 import gulpSass from "gulp-sass";
 import rename from "gulp-rename";
+import cleanCss from "gulp-clean-css";
+import autoPrefixer from "gulp-autoprefixer";
+import groupCssMediaQueries from "gulp-group-css-media-queries";
 
 const sass = gulpSass(dartSass);
 
@@ -21,6 +24,15 @@ export const scss = () => {
         outputStyle: "compressed",
       })
     )
+    .pipe(groupCssMediaQueries())
+    .pipe(
+      autoPrefixer({
+        grid: true,
+        overrideBrowserslidt: ["last 3 versions"],
+        cascade: true,
+      })
+    )
+    .pipe(cleanCss())
     .pipe(
       rename({
         extname: ".css",
