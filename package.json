@@ -1,5 +1,5 @@
 {
-  "name": "Forkio",
+  "name": "Gulp-forkio",
   "version": "0.0.1",
   "description": "Forkio gulp",
   "main": "app.js",
