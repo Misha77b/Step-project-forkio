@@ -2,11 +2,12 @@ import gulp from "gulp";
 // path import
 import { path } from "./gulp/config/path.js";
 // tasks import
-import { copy } from "./gulp/tasks/copy.js";
+// import { copy } from "./gulp/tasks/copy.js";
 import { html } from "./gulp/tasks/html.js";
 import { reset } from "./gulp/tasks/reset.js";
 import { server } from "./gulp/tasks/server.js";
 import { scss } from "./gulp/tasks/scss.js";
+import { scripts } from "./gulp/tasks/scripts.js";
 // plugins
 import { plugins } from "./gulp/config/plugins.js";
 
@@ -20,9 +21,10 @@ function watcher() {
   //   gulp.watch(path.watch.files, copy);
   gulp.watch(path.watch.html, html);
   gulp.watch(path.watch.scss, scss);
+  gulp.watch(path.watch.scripts, scripts);
 }
 //  main tasks
-const mainTask = gulp.parallel(html, scss);
+const mainTask = gulp.parallel(html, scss, scripts);
 // gulp task execution scenario
 const dev = gulp.series(reset, mainTask, gulp.parallel(watcher, server));
 // default task execution
